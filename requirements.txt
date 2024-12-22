@@ -1,4 +1,5 @@
 ultralytics==8.3.53
-opencv-python
+opencv-python==4.8.1.78
+streamlit==1.30.0
 
 
