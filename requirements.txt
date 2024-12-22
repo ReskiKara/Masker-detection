@@ -1,5 +1,4 @@
-ultralytics==8.0.153
-opencv-python==4.10.0.84
-torch==2.2.2
-streamlit==1.23.1
-
+streamlit
+torch
+opencv-python
+ultralytics
