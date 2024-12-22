@@ -1,36 +1,19 @@
 import streamlit as st
 from ultralytics import YOLO
-import cv2
+import torch
+import os
 
-# Load YOLO model
-model = YOLO("best.pt")
+# Pastikan file model ada
+MODEL_PATH = "best.pt"
 
-# Streamlit UI
-st.title("YOLO Object Detection with Streamlit")
+if not os.path.isfile(MODEL_PATH):
+    st.error(f"File model '{MODEL_PATH}' tidak ditemukan. Unggah file model terlebih dahulu.")
+else:
+    try:
+        model = YOLO(MODEL_PATH)
+        st.success("Model berhasil dimuat!")
+    except Exception as e:
+        st.error(f"Terjadi kesalahan saat memuat model: {e}")
 
-# Access Webcam
-stframe = st.empty()
-cam = cv2.VideoCapture(0)
-
-if not cam.isOpened():
-    st.error("Camera not accessible!")
-    st.stop()
-
-while True:
-    ret, image = cam.read()
-    if not ret:
-        st.error("Failed to read from camera")
-        break
-
-    # Predict with YOLO
-    results = model.predict(image, show=False)
-
-    # Display Image
-    stframe.image(image, channels="BGR")
-
-    # Exit Loop with 'q'
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-
-cam.release()
-cv2.destroyAllWindows()
+st.title("Aplikasi Deteksi Masker dengan YOLO")
+st.write("Silakan unggah gambar untuk mendeteksi masker.")
