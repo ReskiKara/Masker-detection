@@ -1,5 +1,5 @@
-ultralytics==8.3.53
-opencv-python==4.8.1.78
+ultralytics==8.0.153
+opencv-python-headless==4.9.0.80
 streamlit==1.30.0
 
 
